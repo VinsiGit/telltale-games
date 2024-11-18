@@ -8,12 +8,16 @@ public class test : MonoBehaviour
 {
     public TextMeshProUGUI uiText; // Assign your UI Text object in the Inspector
     public TMP_InputField inputField; // Assign your InputField object in the Inspector
+    public Button sendButton; // Assign your Button object in the Inspector
     private string apiUrl = "http://localhost:11434/api/generate"; // Local API URL
 
     void Start()
     {
         // Optionally, you can start with a default prompt
         StartCoroutine(FetchDataFromAPI("how are you going?"));
+
+        // Add listener to the button
+        sendButton.onClick.AddListener(OnButtonClick);
     }
 
     public void OnButtonClick()
