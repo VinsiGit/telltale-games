@@ -13,10 +13,10 @@ public class AITalk : MonoBehaviour
     public TMP_InputField inputField; // Assign your InputField object in the Inspector
     public Button sendButton; // Assign your Button object in the Inspector
     public Button resetButton; // Assign your Reset Button object in the Inspector
+    public Button resendButton; // Assign your Resend Button object in the Inspector
     public string masterStringPerson = "You are julius caesar, you only know what julius caesar would have know. "; // Master string for the person role
     private string masterString = "The player has to solve a puzzle by guessing the answer to the question. you will give them $number riddles beginning with easy until hard. you only give them the next riddle when they have solve the previous one. you can help the player but you can't solve it. (you are in a 3d environment where you player is in vr and has a terminal where they can give a answer. what you say will be spoken to them, only speak to them, you are a human. keep your answer short. when the player has answered correctly give them a new riddle and this icon \"[ok]\", this is so the program can know that the answer is correct. you have to give them the next question after [ok] this is very important as else the user doesn't know what to do)"; // Master string for the system role
 
-    public GameObject boxPrefab;
     public int numberOfQuestions = 3; // Number of questions to be answered correctly
 
     private string apiUrl;
@@ -35,7 +35,12 @@ public class AITalk : MonoBehaviour
         // Instantiate the boxes
         for (int i = 0; i < numberOfQuestions; i++)
         {
-            GameObject box = Instantiate(boxPrefab, transform.position + new Vector3(i * 2.0F, 1.0F, 0), Quaternion.identity, transform);
+            GameObject box = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            box.transform.position = transform.position + new Vector3(i * 0.5F, 0.5F, 0);
+            box.transform.parent = transform;
+
+            box.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            // GameObject box = Instantiate(boxPrefab, transform.position + new Vector3(i * 2.0F, 1.0F, 0), Quaternion.identity, transform);
             boxes.Add(box);
         }
 
@@ -50,6 +55,7 @@ public class AITalk : MonoBehaviour
         // Add listener to the buttons
         sendButton.onClick.AddListener(OnButtonClick);
         resetButton.onClick.AddListener(OnResetButtonClick);
+        resendButton.onClick.AddListener(OnResendButtonClick); // Add listener for the resend button
     }
 
     void LoadConfig()
@@ -104,6 +110,23 @@ public class AITalk : MonoBehaviour
         messages.Add(new Message { role = "system", content = masterStringPerson + masterString.Replace("$number", numberOfQuestions.ToString()) });
         StartCoroutine(FetchDataFromAPI());
     }
+    public void OnResendButtonClick()
+    {
+        Debug.Log("Resend button clicked!");
+
+        // Resend the current riddle without resetting the points
+        if (messages.Count > 0)
+        {
+            // Find the last assistant message (the current riddle)
+            Message lastAssistantMessage = messages.FindLast(m => m.role == "assistant");
+            if (lastAssistantMessage != null)
+            {
+                // Add the last assistant message to the messages list again
+                messages.Add(new Message { role = "assistant", content = lastAssistantMessage.content });
+                uiText.text = lastAssistantMessage.content; // Update the UI text with the current riddle
+            }
+        }
+    }
 
     public void LightUpBox()
     {
@@ -114,6 +137,14 @@ public class AITalk : MonoBehaviour
             {
                 boxRenderer.material.color = Color.green; // Change the material color to green
                 correctAnswers++;
+                string updatedMasterString = masterStringPerson + $"You have solved {correctAnswers}/{numberOfQuestions} riddles correctly. " + masterString.Replace("$number", numberOfQuestions.ToString());
+                messages = new List<Message>();
+                messages.Add(new Message { role = "system", content = updatedMasterString });
+
+                // Fetch a new riddle from the API
+                StartCoroutine(FetchDataFromAPI());
+
+
             }
             else
             {
@@ -167,13 +198,15 @@ public class AITalk : MonoBehaviour
                 {
                     LightUpBox(); // Light up a box
                     content = content.Replace("[ok]", ""); // Remove [ok] from the content
+                    messages.Add(new Message { role = "user", content = "give me a riddle" });
                 }
+                else{
+                    // Add response to messages list
+                    messages.Add(new Message { role = "assistant", content = content });
 
-                // Add response to messages list
-                messages.Add(new Message { role = "assistant", content = content });
-
-                // Update the UI text with the entire conversation
-                uiText.text = content; // string.Join("\n", messages.ConvertAll(m => $"{m.role}: {m.content}"));
+                    // Update the UI text with the entire conversation
+                    uiText.text = content; // string.Join("\n", messages.ConvertAll(m => $"{m.role}: {m.content}"));
+                }
             }
         }
     }
