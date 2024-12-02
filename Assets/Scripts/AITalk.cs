@@ -26,6 +26,14 @@ public class AITalk : MonoBehaviour
     private List<GameObject> boxes = new List<GameObject>(); // List to store box prefabs
     private int correctAnswers = 0; // Number of correctly answered questions
 
+
+    void OnValidate()
+    {
+        if (numberOfQuestions < 1)
+        {
+            numberOfQuestions = 1;
+        }
+    }
     void Start()
     {
         // Add the system role message at the top
