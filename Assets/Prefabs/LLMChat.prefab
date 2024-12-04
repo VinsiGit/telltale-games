@@ -1142,11 +1142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a18c188ff276f48a6bf8677eaba9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiText: {fileID: 0}
-  inputField: {fileID: 0}
-  sendButton: {fileID: 0}
-  resetButton: {fileID: 0}
-  resendButton: {fileID: 0}
+  uiText: {fileID: 9041715733976267135}
+  inputField: {fileID: 1701828144370191769}
+  sendButton: {fileID: 1701828143984373312}
+  resetButton: {fileID: 2684953091671310154}
+  resendButton: {fileID: 7015675223492258175}
   masterStringPerson: 'You are julius caesar, you only know what julius caesar would
     have know. '
 --- !u!1 &8935654675206794462
@@ -1396,8 +1396,30 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02be27ab17ab3b14f954f65dc06dd738, type: 3}
+--- !u!114 &1701828143984373312 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3484128599083367831, guid: 02be27ab17ab3b14f954f65dc06dd738, type: 3}
+  m_PrefabInstance: {fileID: 2865423158856897495}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1701828144105892032 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3484128598961847063, guid: 02be27ab17ab3b14f954f65dc06dd738, type: 3}
   m_PrefabInstance: {fileID: 2865423158856897495}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1701828144370191769 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3484128599267958350, guid: 02be27ab17ab3b14f954f65dc06dd738, type: 3}
+  m_PrefabInstance: {fileID: 2865423158856897495}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
