@@ -41,9 +41,26 @@ namespace AIChatNamespace
 
         void LoadConfig()
         {
-            Debug.Log($"Application.dataPath: {Application.dataPath}");
-            string path = Path.Combine(Application.dataPath, "config.json").Replace("\\", "/");
+            Debug.Log($"Application.persistentDataPath: {Application.persistentDataPath}");
+            string path = Path.Combine(Application.persistentDataPath, "config.json").Replace("\\", "/");
             Debug.Log($"Path: {path}");
+            
+            if (!File.Exists(path))
+            {
+                Debug.Log("Config file not found in persistentDataPath. Copying from StreamingAssets.");
+                string sourcePath = Path.Combine(Application.streamingAssetsPath, "config.json").Replace("\\", "/");
+                
+                if (File.Exists(sourcePath))
+                {
+                    File.Copy(sourcePath, path);
+                    Debug.Log("Config file copied to persistentDataPath.");
+                }
+                else
+                {
+                    Debug.LogError("Config file not found in StreamingAssets.");
+                }
+            }
+            
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
@@ -54,7 +71,7 @@ namespace AIChatNamespace
             }
             else
             {
-                Debug.LogError("Config file not found!");
+                Debug.LogError("Config file not found.");
             }
         }
 
