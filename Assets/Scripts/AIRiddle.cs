@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
 using System.IO;
-using System.Text.Json;
+
 namespace AIRiddleNamespace
 {
     public class AIRiddle : MonoBehaviour
@@ -221,12 +221,15 @@ namespace AIRiddleNamespace
             }
         }
     }
+
+    [System.Serializable]
     public class Message
     {
         public string role;
         public string content;
     }
 
+    [System.Serializable]
     public class RequestData
     {
         public string model;
@@ -234,16 +237,20 @@ namespace AIRiddleNamespace
         public bool stream;
     }
 
+
+    [System.Serializable]
     public class ApiResponse
     {
         public List<Choice> choices;
     }
 
+    [System.Serializable]
     public class Choice
     {
         public Message message;
     }
 
+    [System.Serializable]
     public class Config
     {
         public string API_KEY;
