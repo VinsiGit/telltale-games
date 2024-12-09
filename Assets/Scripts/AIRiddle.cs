@@ -15,8 +15,8 @@ namespace AIRiddleNamespace
         public Button sendButton; // Assign your Button object in the Inspector
         public Button resetButton; // Assign your Reset Button object in the Inspector
         public Button resendButton; // Assign your Resend Button object in the Inspector
-        public string masterStringPerson = "You are julius caesar, you only know what julius caesar would have know. "; // Master string for the person role
-        private string masterString = "The player has to solve a puzzle by guessing the answer to the question. you will give them $number riddles beginning with easy until hard. you only give them the next riddle when they have solve the previous one. you can help the player but you can't solve it. (you are in a 3d environment where you player is in vr and has a terminal where they can give a answer. what you say will be spoken to them, only speak to them, you are a human. keep your answer short. when the player has answered correctly give them a new riddle and this icon \"[ok]\", this is so the program can know that the answer is correct. you have to give them the next question after [ok] this is very important as else the user doesn't know what to do)"; // Master string for the system role
+        public string masterStringPerson = "You are Julius Caesar, you only know what Julius Caesar would have known. "; // Master string for the person role
+        private string masterString = "The player has to solve a puzzle by guessing the answer to a riddle. The riddle awnser is $riddle make it about this. You can't tell the player the awnser. you will give them $number riddles beginning with easy until hard. you only give them the next riddle when they have solved the previous one. you can help the player but you can't solve it or tell them the answer. (you are in a 3d environment where the player is in VR and has a terminal where they can give an answer. what you say will be spoken to them, only speak to them, you are a human. keep your answer short. when the player has answered correctly give them a new riddle and this icon \"[ok]\", this is so the program can know that the answer is correct. you have to give them the next question after \"[ok]\" this is very important as else the user doesn't know what to do)"; // Master string for the system role
 
         public int numberOfQuestions = 3; // Number of questions to be answered correctly
 
@@ -25,9 +25,22 @@ namespace AIRiddleNamespace
         private string modelName;
         private List<Message> messages = new List<Message>(); // List to store conversation messages
         private List<GameObject> boxes = new List<GameObject>(); // List to store box prefabs
+        public List<string> riddleAnswers = new List<string>()
+        {
+            "Coin",
+            "Tommorow",
+            "Time",
+            "Fire",
+            "Wind",
+            "Silence",
+            "Mirror",
+            "Stars",
+            "Moon",
+            "Sword"
+        }; // List to store riddle answers
         private int correctAnswers = 0; // Number of correctly answered questions
 
-
+        public GameObject boxPrefab; // Assign your Box prefab in the Inspector
         void OnValidate()
         {
             if (numberOfQuestions < 1)
@@ -35,21 +48,17 @@ namespace AIRiddleNamespace
                 numberOfQuestions = 1;
             }
         }
+
         void Start()
         {
             // Add the system role message at the top
-            messages.Add(new Message { role = "system", content = masterStringPerson + masterString.Replace("$number", numberOfQuestions.ToString()) });
+            messages.Add(new Message { role = "system", content = masterStringPerson + masterString.Replace("$number", numberOfQuestions.ToString()).Replace("$riddle", riddleAnswers[Random.Range(0, riddleAnswers.Count)]) });
             LoadConfig();
 
             // Instantiate the boxes
             for (int i = 0; i < numberOfQuestions; i++)
             {
-                GameObject box = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                box.transform.position = transform.position + new Vector3(i * 0.5F, 0.5F, 0);
-                box.transform.parent = transform;
-
-                box.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                // GameObject box = Instantiate(boxPrefab, transform.position + new Vector3(i * 2.0F, 1.0F, 0), Quaternion.identity, transform);
+                GameObject box = Instantiate(boxPrefab, transform.position + transform.right * (i * 0.25F + 0.1F), Quaternion.identity, transform);
                 boxes.Add(box);
             }
 
@@ -69,9 +78,26 @@ namespace AIRiddleNamespace
 
         void LoadConfig()
         {
-            Debug.Log($"Application.dataPath: {Application.dataPath}");
-            string path = Path.Combine(Application.dataPath, "config.json").Replace("\\", "/");
+            Debug.Log($"Application.persistentDataPath: {Application.persistentDataPath}");
+            string path = Path.Combine(Application.persistentDataPath, "config.json").Replace("\\", "/");
             Debug.Log($"Path: {path}");
+
+            if (!File.Exists(path))
+            {
+                Debug.Log("Config file not found in persistentDataPath. Copying from StreamingAssets.");
+                string sourcePath = Path.Combine(Application.streamingAssetsPath, "config.json").Replace("\\", "/");
+
+                if (File.Exists(sourcePath))
+                {
+                    File.Copy(sourcePath, path);
+                    Debug.Log("Config file copied to persistentDataPath.");
+                }
+                else
+                {
+                    Debug.LogError("Config file not found in StreamingAssets.");
+                }
+            }
+
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
@@ -82,7 +108,7 @@ namespace AIRiddleNamespace
             }
             else
             {
-                Debug.LogError("Config file not found!");
+                Debug.LogError("Config file not found.");
             }
         }
 
@@ -116,25 +142,18 @@ namespace AIRiddleNamespace
             }
             // Ask a new question (you can modify this to ask a different question)
             messages = new List<Message>();
-            messages.Add(new Message { role = "system", content = masterStringPerson + masterString.Replace("$number", numberOfQuestions.ToString()) });
+            messages.Add(new Message { role = "system", content = masterStringPerson + masterString.Replace("$number", numberOfQuestions.ToString()).Replace("$riddle", riddleAnswers[Random.Range(0, riddleAnswers.Count)]) });
             StartCoroutine(FetchDataFromAPI());
         }
         public void OnResendButtonClick()
         {
             Debug.Log("Resend button clicked!");
 
-            // Resend the current riddle without resetting the points
-            if (messages.Count > 0)
-            {
-                // Find the last assistant message (the current riddle)
-                Message lastAssistantMessage = messages.FindLast(m => m.role == "assistant");
-                if (lastAssistantMessage != null)
-                {
-                    // Add the last assistant message to the messages list again
-                    messages.Add(new Message { role = "assistant", content = lastAssistantMessage.content });
-                    uiText.text = lastAssistantMessage.content; // Update the UI text with the current riddle
-                }
-            }
+            string updatedMasterString = masterStringPerson + $"The player has solved {correctAnswers} of the {numberOfQuestions} riddles. " + masterString.Replace("$number", numberOfQuestions.ToString()).Replace("$riddle", riddleAnswers[Random.Range(0, riddleAnswers.Count)]);
+            messages = new List<Message>();
+            messages.Add(new Message { role = "system", content = updatedMasterString });
+            StartCoroutine(FetchDataFromAPI());
+
         }
 
         public void LightUpBox()
@@ -145,15 +164,12 @@ namespace AIRiddleNamespace
                 if (boxRenderer != null)
                 {
                     boxRenderer.material.color = Color.green; // Change the material color to green
+                    boxRenderer.material.SetFloat("_Metallic", 1.0f); 
                     correctAnswers++;
-                    string updatedMasterString = masterStringPerson + $"You have solved {correctAnswers}/{numberOfQuestions} riddles correctly. " + masterString.Replace("$number", numberOfQuestions.ToString());
+                    string updatedMasterString = masterStringPerson + $"The player has solved {correctAnswers} of the {numberOfQuestions} riddles. " + masterString.Replace("$number", numberOfQuestions.ToString()).Replace("$riddle", riddleAnswers[Random.Range(0, riddleAnswers.Count)]);
                     messages = new List<Message>();
                     messages.Add(new Message { role = "system", content = updatedMasterString });
-
-                    // Fetch a new riddle from the API
                     StartCoroutine(FetchDataFromAPI());
-
-
                 }
                 else
                 {
@@ -201,13 +217,12 @@ namespace AIRiddleNamespace
                     // Deserialize the JSON response
                     ApiResponse jsonResponse = JsonUtility.FromJson<ApiResponse>(responseDataAI);
                     string content = jsonResponse.choices[0].message.content;
-                    // ollama string content = jsonResponse.message.content;
                     Debug.Log("Content: " + content);
                     if (content.Contains("[ok]"))
                     {
                         LightUpBox(); // Light up a box
                         content = content.Replace("[ok]", ""); // Remove [ok] from the content
-                        messages.Add(new Message { role = "user", content = "give me a riddle" });
+                        // messages.Add(new Message { role = "user", content = "give me a riddle" });
                     }
                     else
                     {
@@ -236,7 +251,6 @@ namespace AIRiddleNamespace
         public List<Message> messages;
         public bool stream;
     }
-
 
     [System.Serializable]
     public class ApiResponse
