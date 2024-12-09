@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 43a48b1331f91e4438983ad2fcee3cc8, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 8d0de083ce18fd449a2575eaa4b90306, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -412,7 +412,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.9559748, g: 0.5260867, b: 0.78349066, a: 1}
+  m_Color: {r: 0.9882353, g: 0.77254903, b: 0.95207727, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 179
@@ -1582,7 +1582,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.9308176, g: 0.5005339, b: 0.86085284, a: 1}
+  m_Color: {r: 0.96862745, g: 0.7764706, b: 0.91154754, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 179
@@ -2024,13 +2024,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299639867}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.36122364, y: -0.20301767, z: 0.20297328, w: 0.8871884}
+  m_LocalRotation: {x: 0.8895147, y: -0.20428738, z: -0.20169629, w: -0.35545596}
   m_LocalPosition: {x: -17.77, y: 5.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 46.333, y: -18.02, z: 18.01}
+  m_LocalEulerAnglesHint: {x: -45.625, y: -162.217, z: -161.661}
 --- !u!114 &299639870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2587,6 +2587,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_Name
       value: XR Origin (XR Rig)
@@ -5628,7 +5644,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.9622642, g: 0.48718402, b: 0.8553712, a: 1}
+  m_Color: {r: 0.9607843, g: 0.79607844, b: 0.94796646, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 179
@@ -7891,7 +7907,7 @@ VideoPlayer:
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
-  m_Looping: 1
+  m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
@@ -9459,7 +9475,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.9559748, g: 0.48399976, b: 0.8584593, a: 1}
+  m_Color: {r: 0.9490196, g: 0.7137255, b: 0.9431606, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 179
