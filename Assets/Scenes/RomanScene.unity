@@ -1259,15 +1259,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4864840823785990, guid: 2fc015c50966f481699a0e9299eaa6c7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -82.77589
+      value: 30.939
       objectReference: {fileID: 0}
     - target: {fileID: 4864840823785990, guid: 2fc015c50966f481699a0e9299eaa6c7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 91.127075
+      value: 81.225
       objectReference: {fileID: 0}
     - target: {fileID: 4864840823785990, guid: 2fc015c50966f481699a0e9299eaa6c7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -252.63832
+      value: -249.774
       objectReference: {fileID: 0}
     - target: {fileID: 4864840823785990, guid: 2fc015c50966f481699a0e9299eaa6c7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7162,6 +7162,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4785101954367261464, guid: 090b3740ad8e810459909d985dc38866, type: 3}
+      propertyPath: m_TerrainData
+      value: 
+      objectReference: {fileID: 15600000, guid: 0b331d532a030f64a920740dee5d39b1, type: 2}
     - target: {fileID: 6434612831563938175, guid: 090b3740ad8e810459909d985dc38866, type: 3}
       propertyPath: m_LocalPosition.x
       value: -498
