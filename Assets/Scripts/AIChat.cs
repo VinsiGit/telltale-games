@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
 using System.IO;
-using System.Text.Json;
 
 namespace AIChatNamespace
 {
@@ -76,7 +75,7 @@ namespace AIChatNamespace
             uiText.text = "";
 
             // Add the system role message at the top
-            messages.Add(new Message { role = "system", content = masterStringPerson + masterString.Replace("$number", "3") });
+            messages.Add(new Message { role = "system", content = masterStringPerson + masterString });
         }
 
         public void OnResendButtonClick()
