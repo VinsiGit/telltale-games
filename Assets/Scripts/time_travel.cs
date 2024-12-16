@@ -8,7 +8,6 @@ public class time_travel : MonoBehaviour
 {
     public GameObject rotatingObject;
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
-    // Start is called before the first frame update
     void Start()
     {
         Debug.Log("started");
