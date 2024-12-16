@@ -40,6 +40,8 @@ namespace AIRiddleNamespace
         }; // List to store riddle answers
         private int correctAnswers = 0; // Number of correctly answered questions
 
+        private bool done = false;
+
         public GameObject boxPrefab; // Assign your Box prefab in the Inspector
         void OnValidate()
         {
@@ -158,7 +160,7 @@ namespace AIRiddleNamespace
 
         public void LightUpBox()
         {
-            if (correctAnswers < boxes.Count)
+            if (correctAnswers < numberOfQuestions)
             {
                 Renderer boxRenderer = boxes[correctAnswers].GetComponent<Renderer>();
                 if (boxRenderer != null)
@@ -169,7 +171,15 @@ namespace AIRiddleNamespace
                     string updatedMasterString = masterStringPerson + $"The player has solved {correctAnswers} of the {numberOfQuestions} riddles. " + masterString.Replace("$number", numberOfQuestions.ToString()).Replace("$riddle", riddleAnswers[Random.Range(0, riddleAnswers.Count)]);
                     messages = new List<Message>();
                     messages.Add(new Message { role = "system", content = updatedMasterString });
-                    StartCoroutine(FetchDataFromAPI());
+                    if (correctAnswers == numberOfQuestions)
+                    {
+                        uiText.text = "Congratulations! You have solved all the riddles.";
+                        done = true;
+                    }
+                    else
+                    {
+                        StartCoroutine(FetchDataFromAPI());
+                    }
                 }
                 else
                 {
