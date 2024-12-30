@@ -81,36 +81,23 @@ namespace AIRiddleNamespace
         void LoadConfig()
         {
             Debug.Log($"Application.persistentDataPath: {Application.persistentDataPath}");
-            string path = Path.Combine(Application.persistentDataPath, "config.json").Replace("\\", "/");
-            Debug.Log($"Path: {path}");
 
-            if (!File.Exists(path))
+            TextAsset configTextAsset = Resources.Load<TextAsset>("config");
+            if (configTextAsset != null)
             {
-                Debug.Log("Config file not found in persistentDataPath. Copying from StreamingAssets.");
-                string sourcePath = Path.Combine(Application.streamingAssetsPath, "config.json").Replace("\\", "/");
-
-                if (File.Exists(sourcePath))
-                {
-                    File.Copy(sourcePath, path);
-                    Debug.Log("Config file copied to persistentDataPath.");
-                }
-                else
-                {
-                    Debug.LogError("Config file not found in StreamingAssets.");
-                }
-            }
-
-            if (File.Exists(path))
-            {
-                string json = File.ReadAllText(path);
+                string json = configTextAsset.text;
                 Config config = JsonUtility.FromJson<Config>(json);
                 apiKey = config.API_KEY;
                 apiUrl = config.API_URL;
                 modelName = config.MODEL_NAME;
+
+                // Log the loaded configuration
+                Debug.Log($"Loaded Config - API Key: {apiKey}, API Url: {apiUrl}, Model Name: {modelName}");
             }
             else
             {
-                Debug.LogError("Config file not found.");
+                Debug.LogError("Config file not found in Resources.");
+                uiText.text = "Config file not found.";
             }
         }
 
@@ -166,7 +153,7 @@ namespace AIRiddleNamespace
                 if (boxRenderer != null)
                 {
                     boxRenderer.material.color = Color.green; // Change the material color to green
-                    boxRenderer.material.SetFloat("_Metallic", 1.0f); 
+                    boxRenderer.material.SetFloat("_Metallic", 1.0f);
                     correctAnswers++;
                     string updatedMasterString = masterStringPerson + $"The player has solved {correctAnswers} of the {numberOfQuestions} riddles. " + masterString.Replace("$number", numberOfQuestions.ToString()).Replace("$riddle", riddleAnswers[Random.Range(0, riddleAnswers.Count)]);
                     messages = new List<Message>();
@@ -216,7 +203,7 @@ namespace AIRiddleNamespace
                 if (request.result != UnityWebRequest.Result.Success)
                 {
                     UnityEngine.Debug.LogError("Error fetching data: " + request.error);
-                    uiText.text = "Error loading data!";
+                    uiText.text = $"Error loading data! Error: {request.error}\nResponse Code: {request.responseCode}\nResponse: {request.downloadHandler.text}\nURL: {apiUrl}";
                 }
                 else
                 {
