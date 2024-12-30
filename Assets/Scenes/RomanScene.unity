@@ -1973,6 +1973,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.136
       objectReference: {fileID: 0}
+    - target: {fileID: 6912000956894697243, guid: bae508fc665adf44983bff5bfecd0376, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7695500826705326057, guid: bae508fc665adf44983bff5bfecd0376, type: 3}
       propertyPath: m_Name
       value: LLMRiddle
@@ -4537,7 +4541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

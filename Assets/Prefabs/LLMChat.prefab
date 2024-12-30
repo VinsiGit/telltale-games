@@ -1335,6 +1335,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Keyboard
       objectReference: {fileID: 0}
+    - target: {fileID: 3484128598961847050, guid: 02be27ab17ab3b14f954f65dc06dd738, type: 3}
+      propertyPath: maxCharacters
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484128598961847050, guid: 02be27ab17ab3b14f954f65dc06dd738, type: 3}
+      propertyPath: minCharacters
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3484128598961847061, guid: 02be27ab17ab3b14f954f65dc06dd738, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
