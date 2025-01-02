@@ -8,9 +8,13 @@ public class SubtitleManager : MonoBehaviour
 {
     public TextMeshProUGUI subtitleText;
     public GameObject subtitleBox;
+    public Transform playerCamera;
+    public GameObject lookTarget;
     public InputAction nextSubtitleAction;
     public string[] subtitles;
     private int currentSubtitleIndex = 0;
+    private float lookDistance = 50f;
+    private bool looking = false;
     private void OnEnable()
     {
         nextSubtitleAction.Enable();
@@ -47,11 +51,22 @@ public class SubtitleManager : MonoBehaviour
     }
     private void OnNextSubtitlePressed(InputAction.CallbackContext context)
     {
-        ShowNextSubtitle();
+        if (!looking)
+        {
+            ShowNextSubtitle();
+        }
+        else
+        {
+            subtitleText.text = "Tip: look at the right side of the room.";
+        }
     }
     public void ShowNextSubtitle()
     {
         currentSubtitleIndex++;
+        if (currentSubtitleIndex == 2)
+        {
+            looking = true;
+        }
 
         if (currentSubtitleIndex < subtitles.Length)
         {
@@ -62,9 +77,22 @@ public class SubtitleManager : MonoBehaviour
             HideSubtitle();
         }
     }
-    // Update is called once per frame
+    private bool IsPlayerLookingAtObject()
+    {
+        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit, lookDistance))
+        {
+            return hit.collider.gameObject == lookTarget;
+        }
+
+        return false;
+    }
     void Update()
     {
-
+        if (IsPlayerLookingAtObject() && looking)
+        {
+            looking = false;
+            ShowNextSubtitle();
+        }
     }
 }

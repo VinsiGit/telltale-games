@@ -7,11 +7,13 @@ using UnityEngine.SceneManagement;
 public class time_travel : MonoBehaviour
 {
     public GameObject rotatingObject;
+    public GameObject videoObject;
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
     void Start()
     {
         Debug.Log("started");
         rotatingObject.SetActive(false);
+        videoObject.SetActive(false);
         grabInteractable = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
 
         grabInteractable.selectEntered.AddListener(OnGrab);
@@ -25,7 +27,6 @@ public class time_travel : MonoBehaviour
 
     void OnGrab(SelectEnterEventArgs args)
     {
-        Debug.Log("grab");
         TriggerAction();
     }
 
@@ -33,24 +34,8 @@ public class time_travel : MonoBehaviour
     {
 
     }
-    void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other);
-        if (other.CompareTag("Controller"))
-        {
-            TriggerAction();
-        }
-    }
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Controller"))
-        {
-
-        }
-    }
     void TriggerAction()
     {
-        Debug.Log("Scan Complete!");
         rotatingObject.SetActive(true);
     }
     void Update()
