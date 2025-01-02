@@ -1,8 +1,9 @@
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
 
 namespace MTE
 {
+#if UNITY_EDITOR
     [CustomEditor(typeof(RuntimeTextureArrayLoader))]
     public class RuntimeTextureArrayLoaderEditor : Editor
     {
@@ -23,4 +24,5 @@ namespace MTE
             }
         }
     }
+#endif
 }

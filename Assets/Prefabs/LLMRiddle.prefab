@@ -1198,6 +1198,17 @@ MonoBehaviour:
   masterStringPerson: 'You are julius caesar, you only know what julius caesar would
     have know. '
   numberOfQuestions: 1
+  riddleAnswers:
+  - Coin
+  - Tommorow
+  - Time
+  - Fire
+  - Wind
+  - Silence
+  - Mirror
+  - Stars
+  - Moon
+  - Sword
   boxPrefab: {fileID: 6129290843201309784, guid: 3ecb44b9814f13243a9e8c2edcafcca4, type: 3}
 --- !u!1 &8257349955571077795
 GameObject:
@@ -1336,6 +1347,14 @@ PrefabInstance:
     - target: {fileID: 3484128598961847049, guid: 02be27ab17ab3b14f954f65dc06dd738, type: 3}
       propertyPath: m_Name
       value: Keyboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484128598961847050, guid: 02be27ab17ab3b14f954f65dc06dd738, type: 3}
+      propertyPath: maxCharacters
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484128598961847050, guid: 02be27ab17ab3b14f954f65dc06dd738, type: 3}
+      propertyPath: minCharacters
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3484128598961847061, guid: 02be27ab17ab3b14f954f65dc06dd738, type: 3}
       propertyPath: m_PresetInfoIsWorld
