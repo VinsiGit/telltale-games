@@ -95,10 +95,9 @@ public class turning : MonoBehaviour
     {
         videoObject.SetActive(true);
 
-        VideoPlayer videoPlayer = videoObject.GetComponent<VideoPlayer>();
+        VideoPlayer videoPlayer = videoObject.GetComponentInChildren<VideoPlayer>();
         if (videoPlayer != null)
         {
-            Debug.Log("video start");
             videoPlayer.Play();
         }
         isFading = true;
