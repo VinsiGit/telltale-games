@@ -119,6 +119,7 @@ public class turning : MonoBehaviour
         if (isFading && videoMaterial != null)
         {
             alpha += Time.deltaTime / fadeDuration;
+            Debug.Log("alpha: " + alpha);
             if (alpha >= 1.0f)
             {
                 alpha = 1.0f;
