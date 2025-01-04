@@ -45,7 +45,6 @@ public class ReverseTeleport : MonoBehaviour
         VideoPlayer videoPlayer = videoObject.GetComponentInChildren<VideoPlayer>();
         if (videoPlayer != null)
         {
-            Debug.Log("video started");
             videoPlayer.time = 2;
             videoPlayer.Play();
         }
@@ -65,7 +64,6 @@ public class ReverseTeleport : MonoBehaviour
                 alpha = 0.0f;
                 isFading = false;
             }
-            Debug.Log("alpha " + alpha);
             Color color = videoMaterial.color;
             color.a = alpha;
             videoMaterial.color = color;
