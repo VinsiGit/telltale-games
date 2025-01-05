@@ -1991,11 +1991,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 798260615328358036, guid: bae508fc665adf44983bff5bfecd0376, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 798260615328358036, guid: bae508fc665adf44983bff5bfecd0376, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1331296310484468465, guid: bae508fc665adf44983bff5bfecd0376, type: 3}
       propertyPath: numberOfQuestions
@@ -2031,15 +2031,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1938847380312326593, guid: bae508fc665adf44983bff5bfecd0376, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1938847380312326593, guid: bae508fc665adf44983bff5bfecd0376, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1938847380312326593, guid: bae508fc665adf44983bff5bfecd0376, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4821383884598806810, guid: bae508fc665adf44983bff5bfecd0376, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2091,11 +2091,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7695500826705326057, guid: bae508fc665adf44983bff5bfecd0376, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7699676297271017840, guid: bae508fc665adf44983bff5bfecd0376, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 13.41
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4562,7 +4562,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140533962}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 0.02, y: 0.02, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4907,7 +4907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7519,27 +7519,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 230166532991444758, guid: 12fd98118e6bf2b44b8c3832259a5262, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 13.41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2951171374241428263, guid: 12fd98118e6bf2b44b8c3832259a5262, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2951171374241428263, guid: 12fd98118e6bf2b44b8c3832259a5262, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2951171374241428263, guid: 12fd98118e6bf2b44b8c3832259a5262, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3641633021105434200, guid: 12fd98118e6bf2b44b8c3832259a5262, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3641633021105434200, guid: 12fd98118e6bf2b44b8c3832259a5262, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8454384681749219843, guid: 12fd98118e6bf2b44b8c3832259a5262, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7587,7 +7587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8651218497771150992, guid: 12fd98118e6bf2b44b8c3832259a5262, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8812,8 +8812,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
